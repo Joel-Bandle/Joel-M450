@@ -69,6 +69,12 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
+    # Kein actions/checkout in diesem Job -> der workspace-relative
+    # working-directory aus den Workflow-weiten defaults existiert hier nicht.
+    # Deshalb fuer diesen Job auf das Workspace-Root zurueckgesetzt.
+    defaults:
+      run:
+        working-directory: .
     steps:
       - name: Report-Verfuegbarkeit bestaetigen
         run: |
