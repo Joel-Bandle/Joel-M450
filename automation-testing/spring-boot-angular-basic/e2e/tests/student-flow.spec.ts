@@ -1,9 +1,5 @@
 import { test, expect } from '@playwright/test';
 
-// Uebung 2: End-to-End-Test der Angular-Oberflaeche mit Playwright.
-// Voraussetzung: Backend (Port 8081) UND Frontend (Port 4200, "ng serve")
-// laufen bereits lokal, siehe AUFGABEN5.md.
-
 test('Startseite zeigt beide Navigationslinks', async ({ page }) => {
   await page.goto('/');
 
@@ -16,7 +12,6 @@ test('Studierendenliste zeigt die bestehenden Studierenden aus dem Backend', asy
   await page.getByRole('link', { name: 'List Students' }).click();
 
   await expect(page).toHaveURL(/.*\/students/);
-  // Namen kommen echt vom Backend (GET http://localhost:8081/students)
   await expect(page.getByRole('cell', { name: 'Jonas', exact: true })).toBeVisible();
 });
 
@@ -30,7 +25,6 @@ test('Neuen Studierenden über das Formular anlegen und in der Liste sehen', asy
   await page.getByLabel('Email').fill(email);
   await page.getByRole('button', { name: 'Submit' }).click();
 
-  // Nach dem Absenden navigiert die App automatisch zur Liste
   await expect(page).toHaveURL(/.*\/students/);
   await expect(page.getByRole('cell', { name: uniqueName, exact: true })).toBeVisible();
 });

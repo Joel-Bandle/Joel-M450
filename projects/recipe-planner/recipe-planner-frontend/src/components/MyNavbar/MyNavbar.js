@@ -12,8 +12,8 @@ const MyNavbar=()=>{
                 <Navbar.Brand href="/">Recipe Planner</Navbar.Brand>
                 <Nav className="me-auto">
                     <Nav.Link href="/">Browse</Nav.Link>
-                    <Nav.Link href="planer">Planer</Nav.Link>
-                    <Nav.Link href="new-menues">Add Recipes</Nav.Link>
+                    <Nav.Link href="/planer">Planer</Nav.Link>
+                    <Nav.Link href="/new-menues">Add Recipes</Nav.Link>
                 </Nav>
             </Container>
         </Navbar>

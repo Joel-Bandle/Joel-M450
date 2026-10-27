@@ -1,0 +1,1 @@
+{"version":2,"defects":{"Test::testShortString":7,"Test::testCalcAverage":7,"Test::testGetOpposite":7},"times":{"Test::testShortString":0.001,"Test::testCalcAverage":0,"Test::testGetOpposite":0}}

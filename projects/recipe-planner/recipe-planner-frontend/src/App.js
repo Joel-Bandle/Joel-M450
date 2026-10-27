@@ -20,6 +20,7 @@ function App() {
           <Route path="/" element={<Browse/>} />
           <Route path="/planer" element={<Planer/>} />
           <Route path="/new-menues" element={<AddRecipe/>} />
+          <Route path="/edit/:id" element={<AddRecipe/>} />
         </Routes>
       </div>
       </>

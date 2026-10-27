@@ -41,4 +41,13 @@ public class RecipeController {
         return new ResponseEntity<>(service.addRecipe(recipe), HttpStatus.OK);
     }
 
+    @PutMapping("/api/recipes/{recipeId}")
+    public ResponseEntity<Recipe> updateRecipe(@PathVariable UUID recipeId, @RequestBody Recipe recipe) {
+        Recipe updatedRecipe = service.updateRecipe(recipeId, recipe);
+        if (updatedRecipe == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(updatedRecipe, HttpStatus.OK);
+    }
+
 }

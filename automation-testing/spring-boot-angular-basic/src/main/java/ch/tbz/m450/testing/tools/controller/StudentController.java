@@ -32,12 +32,6 @@ public class StudentController {
         return ResponseEntity.ok(studentRepository.save(user));
     }
 
-    /**
-     * Bonus-Feature: Input-Validierung + Error Handling. Statt der
-     * generischen Spring-Fehlerantwort geben wir bei ungueltiger Eingabe
-     * (z.B. leerer Name oder ungueltige Email) ein kompaktes JSON mit den
-     * konkreten Feldfehlern zurueck, HTTP 400.
-     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationError(MethodArgumentNotValidException ex) {
         Map<String, String> errors = ex.getBindingResult().getFieldErrors().stream()

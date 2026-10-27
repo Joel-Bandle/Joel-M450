@@ -12,20 +12,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Reiner Unit-Test ohne Spring-Kontext: der von MapStruct generierte
- * RecipeEntityMapperImpl laesst sich ganz normal per "new" instanzieren,
- * unabhaengig vom componentModel = "spring".
- *
- * Vorteil von SoftAssertions: Normale Assertions (assertThat/assertEquals)
- * brechen beim ERSTEN fehlschlagenden Feld sofort ab, man sieht also pro
- * Testlauf hoechstens einen Fehler und muss fixen-neu-ausfuehren-wiederholen.
- * SoftAssertions sammelt dagegen ALLE fehlgeschlagenen Pruefungen und wirft
- * sie erst bei softly.assertAll() gesammelt als eine Fehlermeldung -- bei
- * einem Mapper mit vielen Feldern sieht man so auf einen Blick, welche
- * Felder ALLE falsch gemappt wurden, statt sie einzeln nacheinander
- * aufzudecken.
- */
 class RecipeEntityMapperTest {
 
     private final RecipeEntityMapper mapper = new RecipeEntityMapperImpl();

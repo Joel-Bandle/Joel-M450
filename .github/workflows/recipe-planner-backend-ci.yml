@@ -1,9 +1,5 @@
 name: Recipe Planner Backend CI
 
-# Aufgabe 3 (Automatisiertes Testen und Deployen): entspricht den drei Stages
-# build -> test -> deploy aus der Theorie, nur mit GitHub Actions statt
-# GitLab CI (beides laut Aufgabenstellung erlaubt, das Repo liegt auf GitHub).
-# Jeder Push/PR, der etwas am Backend aendert, triggert die Pipeline.
 
 on:
   push:
@@ -69,9 +65,6 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
-    # Kein actions/checkout in diesem Job -> der workspace-relative
-    # working-directory aus den Workflow-weiten defaults existiert hier nicht.
-    # Deshalb fuer diesen Job auf das Workspace-Root zurueckgesetzt.
     defaults:
       run:
         working-directory: .

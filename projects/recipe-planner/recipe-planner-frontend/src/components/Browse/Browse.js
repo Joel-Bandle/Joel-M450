@@ -23,8 +23,8 @@ const Browse = () => {
             <>
                 <Row>
                     {post.map((d) => (
-                        <Col sm={12} md={6} lg={4} xl={3}>
-                            <Recipe title={d.name} description={d.description} image={d.imageUrl} />
+                        <Col key={d.id} sm={12} md={6} lg={4} xl={3}>
+                            <Recipe id={d.id} title={d.name} description={d.description} image={d.imageUrl} />
                         </Col>
                     ))}
                 </Row>

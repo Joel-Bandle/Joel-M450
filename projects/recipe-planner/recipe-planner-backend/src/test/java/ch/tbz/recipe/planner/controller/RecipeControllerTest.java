@@ -20,20 +20,9 @@ import java.util.UUID;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-/**
- * Aufgabe 1: alle drei Controller-Methoden via MockMvc getestet.
- * @WebMvcTest startet nur die Web-Schicht, RecipeService wird komplett
- * gemockt -> der Test kommt nie in die Naehe der echten H2-Datenbank.
- * RecipeEntityMapper wird im Controller entgegengenommen, aber (soweit
- * ersichtlich) nirgends effektiv benutzt -- trotzdem als Bean noetig,
- * damit Spring den Konstruktor befuellen kann, deshalb ebenfalls gemockt.
- * RecipeRepository wird hier gar nicht vom Controller gebraucht, aber
- * @WebMvcTest verarbeitet trotzdem die @Bean-Methode "init(...)" aus
- * RecipePlannerApplication (der Haupt-Konfigurationsklasse) mit -- ohne
- * dieses Mock wuerde der Testkontext beim Start fehlschlagen.
- */
 @WebMvcTest(RecipeController.class)
 class RecipeControllerTest {
 
@@ -89,5 +78,29 @@ class RecipeControllerTest {
                         .content(objectMapper.writeValueAsString(lasagne)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Lasagne al Forno"));
+    }
+
+    @Test
+    void updateRecipeGibt200UndDasAktualisierteRezeptZurueck() throws Exception {
+        when(recipeService.updateRecipe(org.mockito.ArgumentMatchers.eq(lasagne.getId()), org.mockito.ArgumentMatchers.any(Recipe.class)))
+                .thenReturn(lasagne);
+
+        mockMvc.perform(put("/api/recipes/{recipeId}", lasagne.getId())
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(lasagne)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Lasagne al Forno"));
+    }
+
+    @Test
+    void updateRecipeGibt404WennDasRezeptNichtExistiert() throws Exception {
+        UUID unbekannt = UUID.randomUUID();
+        when(recipeService.updateRecipe(org.mockito.ArgumentMatchers.eq(unbekannt), org.mockito.ArgumentMatchers.any(Recipe.class)))
+                .thenReturn(null);
+
+        mockMvc.perform(put("/api/recipes/{recipeId}", unbekannt)
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(lasagne)))
+                .andExpect(status().isNotFound());
     }
 }

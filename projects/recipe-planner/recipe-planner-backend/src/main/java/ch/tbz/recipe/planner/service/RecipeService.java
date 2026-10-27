@@ -34,4 +34,17 @@ public class RecipeService {
         var createdRecipe = repository.save(mapper.domainToEntity(recipe));
         return mapper.entityToDomain(createdRecipe);
     }
+
+    /**
+     * Ueberschreibt ein bestehendes Rezept. Gibt null zurueck, wenn es kein
+     * Rezept mit dieser ID gibt (der Controller macht daraus ein 404).
+     */
+    public Recipe updateRecipe(UUID recipeId, Recipe recipe) {
+        if (repository.findById(recipeId).isEmpty()) {
+            return null;
+        }
+        recipe.setId(recipeId);
+        var updatedRecipe = repository.save(mapper.domainToEntity(recipe));
+        return mapper.entityToDomain(updatedRecipe);
+    }
 }
