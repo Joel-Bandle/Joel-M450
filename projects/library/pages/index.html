@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Library – Testreports</title>
+  <style>
+    :root { --bg: #f6f7f9; --card: #ffffff; --text: #1d2330; --muted: #5c6578; --accent: #1f6feb; --border: #dde1e8; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #0f131a; --card: #171c26; --text: #e6e9f0; --muted: #98a2b8; --accent: #6ea8ff; --border: #2a3142; }
+    }
+    body { margin: 0; font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    main { max-width: 640px; margin: 0 auto; padding: 48px 16px; }
+    h1 { margin: 0 0 4px; font-size: 1.6rem; }
+    p { color: var(--muted); margin: 0 0 28px; }
+    a.card { display: block; background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+             padding: 18px 20px; margin-bottom: 14px; text-decoration: none; color: var(--text); }
+    a.card:hover { border-color: var(--accent); }
+    a.card strong { display: block; color: var(--accent); margin-bottom: 4px; }
+    a.card span { color: var(--muted); font-size: .95rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Library – Testreports</h1>
+    <p>Automatisch erzeugt von der Pipeline bei jedem Push auf <code>main</code>.</p>
+    <a class="card" href="tests/index.html">
+      <strong>Testresultate (Surefire)</strong>
+      <span>Alle Unit-, Component- und Integrationstests mit Ergebnis und Laufzeit.</span>
+    </a>
+    <a class="card" href="coverage/index.html">
+      <strong>Code Coverage (JaCoCo)</strong>
+      <span>Zeilen- und Verzweigungsabdeckung pro Paket, Klasse und Zeile.</span>
+    </a>
+  </main>
+</body>
+</html>
